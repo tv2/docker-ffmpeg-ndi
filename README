@@ -1,2 +1,12 @@
-Run NDI Docker:
- sudo docker run --net=host 7b386034558a -f libndi_newtek -i 'STUDIER (Afv.G)' -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video0
+FFmpeg Encoder/Decoder with NDI included:
+
+Run FFmpeg-NDI Docker:
+
+For a virtual Webcam with NDI source:
+Docker run --net=host ffmpeg -f libndi_newtek -i 'STUDIER (Afv.G)' -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video0
+
+Reencode a NDI source:
+sudo docker run --net=host 7b386034558a -f libndi_newtek -i 'STUDIER (Afv.G)' -f libndi_newtek -pix_fmt uyvy422 'KAOLTEST'
+
+Show all NDI sources:
+ffmpeg -f libndi_newtek -find_sources 1 -i dummy
