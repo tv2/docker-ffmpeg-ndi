@@ -1,0 +1,12 @@
+version: "2"
+services:
+  ffmpeg:
+    build: .
+  networks:
+    ipv4_address: 192.168.0.34
+
+networks:
+    default:
+        external:
+           name: pub_net
+
