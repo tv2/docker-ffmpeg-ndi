@@ -99,6 +99,7 @@ RUN ldconfig
 WORKDIR "/ffmpeg_sources"
 RUN 	wget -O ffmpeg-4.1.1.tar.bz2 http://ffmpeg.org/releases/ffmpeg-4.1.1.tar.bz2 && \
         tar xjvf ffmpeg-4.1.1.tar.bz2
+RUN	mv ffmpeg-4.1.1 ffmpeg
 
 # Compile FFmpeg:
 WORKDIR "/ffmpeg_sources/ffmpeg"
