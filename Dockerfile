@@ -23,29 +23,30 @@ FROM base as build
 # Environment
 ENV        PKG_CONFIG_PATH=/ffmpeg_build/ffmpeg/lib/pkgconfig
 
+
 # Build dependencies:
-RUN     buildDeps="autoconf \ 
+RUN     buildDeps="autoconf \
 		automake \
-		build-essential \ 
-		cmake \ 
+		build-essential \
+		cmake \
 		git \
-		libass-dev \ 
-		libfreetype6-dev \ 
-		libtheora-dev \ 
-		libtool \ 
-		libvorbis-dev \ 
-		mercurial \ 
-		pkg-config \ 
- 		texinfo \ 
- 		wget \ 
-		zlib1g-dev \ 
-		yasm \ 
-		libx264-dev \ 
-		libx265-dev \ 
-		libvpx-dev \ 
-		libfdk-aac-dev \ 
-		libmp3lame-dev \ 
-		libopus-dev \ 
+		libass-dev \
+		libfreetype6-dev \
+		libtheora-dev \
+		libtool \
+		libvorbis-dev \
+		mercurial \
+		pkg-config \
+ 		texinfo \
+ 		wget \
+		zlib1g-dev \
+		yasm \
+		libx264-dev \
+		libx265-dev \
+		libvpx-dev \
+		libfdk-aac-dev \
+		libmp3lame-dev \
+		libopus-dev \
 		v4l-utils \
 		v4l2loopback-dkms \
 		libsdl2-dev \
@@ -57,25 +58,25 @@ RUN     buildDeps="autoconf \
 		libxcb1-dev \
 		libxcb-shm0-dev \
 		libxcb-xfixes0-dev \
-		libopencore-amrnb-dev \ 
-		libopencore-amrwb-dev \ 
+		libopencore-amrnb-dev \
+		libopencore-amrwb-dev \
 		librtmp-dev \
-        curl \
-        bzip2 \
-        libexpat1-dev \
-        g++ \
-        gcc \
-        gperf \
-        libtool \
-        make \
-        nasm \
-        perl \
-        pkg-config \
-        python \
+        	curl \
+        	bzip2 \
+        	libexpat1-dev \
+        	g++ \
+        	gcc \
+        	gperf \
+        	libtool \
+        	make \
+        	nasm \
+        	perl \
+        	pkg-config \
+        	python2 \
 		avahi-daemon \
 		avahi-utils \
 		libnss-mdns \
-        libssl-dev" && \
+        	libssl-dev" && \
         apt-get -yqq update && \
         apt-get install -yq --no-install-recommends ${buildDeps}
 
