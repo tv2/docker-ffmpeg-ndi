@@ -97,15 +97,15 @@ RUN ldconfig
 
 # Fetch FFmpeg:
 WORKDIR "/ffmpeg_sources"
-RUN 	wget -O ffmpeg-snapshot.tar.bz2 http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
-        tar xjvf ffmpeg-snapshot.tar.bz2
+RUN 	wget -O ffmpeg-4.1.1.tar.bz2 http://ffmpeg.org/releases/ffmpeg-4.1.1.tar.bz2 && \
+        tar xjvf ffmpeg-4.1.1.tar.bz2
 
 # Compile FFmpeg:
 WORKDIR "/ffmpeg_sources/ffmpeg"
 RUN 	./configure \
 			--prefix="/ffmpeg_build" \
 			--pkg-config-flags="--static" \
-			--extra-cflags="-I/ndi/NDI_SDK_for_Linux/include" \ 
+			--extra-cflags="-I/ndi/NDI_SDK_for_Linux/include" \
 			--extra-ldflags="-L/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" \
 			--bindir="/bin" \
 			--enable-gpl \
@@ -115,16 +115,16 @@ RUN 	./configure \
 			--enable-libmp3lame \
 			--enable-libopencore-amrnb \
 			--enable-libopencore-amrwb \
-			--enable-librtmp  \
-			--enable-libopus  \
-			--enable-libtheora  \
+			--enable-librtmp \
+			--enable-libopus \
+			--enable-libtheora \
 			--enable-libvorbis \
-			--enable-libvpx  \
+			--enable-libvpx \
 			--enable-libx264 \
-			--enable-nonfree   \
+			--enable-nonfree \
 			--enable-version3 \
 			--enable-libndi_newtek \
-			--enable-libxcb \  
+			--enable-libxcb \
 			--disable-decklink
 
 RUN make
