@@ -4,11 +4,28 @@ WORKDIR	/
 
 # CleanUp Ubuntu
 RUN	apt-get -yqq update && \
-	apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 && \
+	apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 wget && \
 	apt-get autoremove -y && \
 	apt-get clean -y
 
-FROM	base AS build
+FROM	base AS ndi
+
+# Install NDI SDK
+WORKDIR "/ndi"
+#RUN	wget https://github.com/keith8496/docker-ffmpeg-ndi/raw/master/InstallNDISDK_v3_Linux.sh
+COPY	InstallNDISDK_v3_Linux.sh .
+RUN     chmod +x InstallNDISDK_v3_Linux.sh
+RUN     ./InstallNDISDK_v3_Linux.sh
+
+# ToDo..... mv rename file to underscore: (find fix for this workaround)
+RUN     mv NDI\ SDK\ for\ Linux NDI_SDK_for_Linux
+
+# Put NDI lib ref text into conf file
+RUN     echo "/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/ndi.conf
+RUN     ldconfig
+
+
+FROM	ndi as ffmpeg
 
 # Environment
 ENV	PKG_CONFIG_PATH=/ffmpeg_build/ffmpeg/lib/pkgconfig
@@ -71,19 +88,6 @@ RUN	buildDeps="autoconf \
 
 # Prepare build sources, build and lib folders:
 WORKDIR	"ffmpeg_build/lib/pkgconfig"
-
-# Install NDI SDK
-WORKDIR	"/ndi"
-COPY	InstallNDISDK_v3_Linux.sh .
-RUN	chmod +x InstallNDISDK_v3_Linux.sh
-RUN	./InstallNDISDK_v3_Linux.sh 
-
-# ToDo..... mv rename file to underscore: (find fix for this workaround)
-RUN	mv NDI\ SDK\ for\ Linux NDI_SDK_for_Linux
-
-# Put NDI lib ref text into conf file
-RUN	echo "/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/ndi.conf
-RUN	ldconfig
 
 # Fetch FFmpeg:
 WORKDIR	"/ffmpeg_sources"
