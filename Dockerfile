@@ -4,7 +4,7 @@ WORKDIR	/
 
 # CleanUp Ubuntu
 RUN	apt-get -yqq update && \
-	apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 wget && \
+	apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 curl && \
 	apt-get autoremove -y && \
 	apt-get clean -y
 
