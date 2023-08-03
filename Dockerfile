@@ -12,10 +12,11 @@ FROM	base AS ndi
 
 # Install NDI SDK
 WORKDIR "/ndi"
-#RUN	wget https://github.com/keith8496/docker-ffmpeg-ndi/raw/master/InstallNDISDK_v3_Linux.sh
-COPY	InstallNDISDK_v3_Linux.sh .
-RUN     chmod +x InstallNDISDK_v3_Linux.sh
-RUN     ./InstallNDISDK_v3_Linux.sh
+#COPY	InstallNDISDK_v3_Linux.sh .
+RUN	curl 'https://public.ph.files.1drv.com/y4mfVSdmdR1v_I4dHNqpvVaFoKHjSASNGRIT80Ep5PllUUuhJsPB292_tg54czKkBkhrHO67H_9SCnevB3mc41R5_Vfbt39_6cNIZ2roK0xuYYkqw4bhuGBLS-XceREfm_eAL3QF0S7lJdG2iML9YR7e9y1DtkdnrRjeW0KdPiG8t905dM6aPk1GTdW1krCUdW9NbhSZvalLl2NSe45vbCiUHc9GfDjaB9V-vnLPn3ZFog?AVOverride=1' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'Connection: keep-alive' -H 'Referer: https://onedrive.live.com/' -H 'Upgrade-Insecure-Requests: 1' -H 'Sec-Fetch-Dest: iframe' -H 'Sec-Fetch-Mode: navigate' -H 'Sec-Fetch-Site: cross-site' -H 'TE: trailers' --output Install_NDI_SDK_v5_Linux.tar.gz
+RUN	tar -xvzf Install_NDI_SDK_v5_Linux.tar.gz
+RUN     chmod +x Install_NDI_SDK_v5_Linux.sh
+RUN     ./Install_NDI_SDK_v5_Linux.sh
 
 # ToDo..... mv rename file to underscore: (find fix for this workaround)
 RUN     mv NDI\ SDK\ for\ Linux NDI_SDK_for_Linux
