@@ -15,14 +15,15 @@ ENV	DEBIAN_FRONTEND noninteractive
 WORKDIR "/ndi"
 #COPY	InstallNDISDK_v3_Linux.sh .
 COPY	NDI_SDK_v5.tar.gz .
-RUN	tar -xvfz NDI_SDK_v5.tar.gz
+RUN	tar -xvf NDI_SDK_v5.tar.gz
+RUN	rm NDI_SDK_v5.tar.gz
 
 ## ToDo..... mv rename file to underscore: (find fix for this workaround)
 #RUN     mv NDI\ SDK\ for\ Linux NDI_SDK_for_Linux
 
 # Put NDI lib ref text into conf file
 #RUN     echo "/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/ndi.conf
-RUN	echo "/ndi/NDI_SDK_v5" >> /etc/ld.so.conf.d/ndi.conf
+RUN	echo "/ndi" >> /etc/ld.so.conf.d/ndi.conf
 RUN     ldconfig
 
 
