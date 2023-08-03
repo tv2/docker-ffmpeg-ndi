@@ -14,16 +14,14 @@ ENV	DEBIAN_FRONTEND noninteractive
 # Install NDI SDK
 WORKDIR "/ndi"
 #COPY	InstallNDISDK_v3_Linux.sh .
-COPY	NDI_SDK_v5.tar.gz .
-RUN	tar -xvf NDI_SDK_v5.tar.gz
-RUN	rm NDI_SDK_v5.tar.gz
+COPY	NDI_SDK_v5_Linux_x86-64-linux-gnu.tar.gz .
+RUN	tar -xzf NDI_SDK_v5_Linux_x86-64-linux-gnu.tar.gz
 
 ## ToDo..... mv rename file to underscore: (find fix for this workaround)
 #RUN     mv NDI\ SDK\ for\ Linux NDI_SDK_for_Linux
 
 # Put NDI lib ref text into conf file
-#RUN     echo "/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/ndi.conf
-RUN	echo "/ndi" >> /etc/ld.so.conf.d/ndi.conf
+RUN	echo "/ndi/NDI_SDK_v5_Linux/lib/x86_64-linux-gnu" >> /etc/ld.so.conf.d/ndi.conf
 RUN     ldconfig
 
 
@@ -102,8 +100,8 @@ WORKDIR	"/ffmpeg_sources/ffmpeg"
 RUN	./configure \
 		--prefix="/ffmpeg_build" \
 		--pkg-config-flags="--static" \
-		--extra-cflags="-I/ndi/NDI_SDK_for_Linux/include" \
-		--extra-ldflags="-L/ndi/NDI_SDK_for_Linux/lib/x86_64-linux-gnu" \
+		--extra-cflags="-I/ndi/NDI_SDK_v5_for_Linux/include" \
+		--extra-ldflags="-L/ndi/NDI_SDK_v5_for_Linux/lib/x86_64-linux-gnu" \
 		--bindir="/bin" \
 		--enable-gpl \
 		--enable-libass \
