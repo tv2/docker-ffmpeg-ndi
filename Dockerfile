@@ -9,6 +9,7 @@ RUN	apt-get -yqq update && \
 	apt-get clean -y
 
 FROM	base AS ndi
+ENV	DEBIAN_FRONTEND noninteractive
 
 # Install NDI SDK
 WORKDIR "/ndi"
